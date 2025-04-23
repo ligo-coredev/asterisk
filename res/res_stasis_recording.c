@@ -341,7 +341,8 @@ static int record_file(struct stasis_app_control *control,
 		recording->options->max_silence_seconds ? &recording->duration.energy_only : NULL,
 		recording->options->beep,
 		-1, /* silencethreshold */
-		recording->options->max_silence_seconds * 1000,
+		(recording->options->max_silence_seconds <= 100)? recording->options->max_silence_seconds * 1000:recording->options->max_silence_seconds, /*LIGO-CD-5407*/
+		(recording->options->start_silence_seconds <= 100)? recording->options->start_silence_seconds * 1000:recording->options->start_silence_seconds, /*LIGO-CD-5407*/
 		NULL, /* path */
 		acceptdtmf,
 		NULL, /* canceldtmf */

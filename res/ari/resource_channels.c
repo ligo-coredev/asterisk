@@ -771,6 +771,15 @@ void ast_ari_channels_record(struct ast_variable *headers,
 		ast_ari_response_error(
 			response, 400, "Bad Request",
 			"max_silence_seconds cannot be negative");
+/* LIGO-CD-5407 Inicio */ 
+			return;
+		}
+	
+		if (args->start_silence_seconds < 0) {
+			ast_ari_response_error(
+				response, 400, "Bad Request",
+				"start_silence_seconds cannot be negative");
+/* LIGO-CD-5407 Final */ 
 		return;
 	}
 
@@ -789,6 +798,7 @@ void ast_ari_channels_record(struct ast_variable *headers,
 	ast_string_field_build(options, target, "channel:%s", args->channel_id);
 	options->max_silence_seconds = args->max_silence_seconds;
 	options->max_duration_seconds = args->max_duration_seconds;
+	options->start_silence_seconds = args->start_silence_seconds; /* LIGO-CD-5407 */
 	options->terminate_on =
 		stasis_app_recording_termination_parse(args->terminate_on);
 	options->if_exists =

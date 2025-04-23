@@ -637,6 +637,8 @@ struct ast_ari_channels_record_args {
 	int beep;
 	/*! DTMF input to terminate recording */
 	const char *terminate_on;
+	/*! Stat duration of silence, in seconds. 0 for no limit */
+	int start_silence_seconds; /* LIGO-CD-5407 */ 
 };
 /*!
  * \brief Body parsing function for /channels/{channelId}/record.

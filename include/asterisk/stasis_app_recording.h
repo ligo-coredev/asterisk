@@ -191,7 +191,9 @@ struct stasis_app_recording_options {
 	/*! How to handle recording when a file already exists */
 	enum ast_record_if_exists if_exists;
 	/*! If true, a beep is played at the start of recording */
-	int beep:1;
+	int beep:1; 
+	    /*! Number of seconds of silence after recording starts. */
+		int start_silence_seconds; /*LIGO-CD-5407*/
 };
 
 /*!
