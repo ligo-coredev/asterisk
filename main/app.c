@@ -1796,7 +1796,7 @@ static int global_maxsilence = 0;
  */
 static int __ast_play_and_record(struct ast_channel *chan, const char *playfile,
 	const char *recordfile, int maxtime, const char *fmt, int *duration,
-	int *sound_duration, int beep, int silencethreshold, int maxsilence,
+	int *sound_duration, int beep, int silencethreshold, int maxsilence, int startsilence,
 	const char *path, int prepend, const char *acceptdtmf, const char *canceldtmf,
 	int skip_confirmation_sound, enum ast_record_if_exists if_exists)
 {
@@ -2045,34 +2045,35 @@ static int __ast_play_and_record(struct ast_channel *chan, const char *playfile,
 								  detecting_initial_silence = 0;
 					  ast_verb(5,"VERBO- Voz detectado - DSPSILENCE = 0");
 							  }	
-			  }else{
-				  ast_verb(3, "ELSE Recording  dspsilence = %f initial_silence = %f startSilence = %f\n", dspsilence/1000, initial_silence/1000, startsilence/1000);
-				if (maxsilence > 0) {
-					dspsilence = 0;
-					ast_dsp_silence(sildet, f, &dspsilence);
-					if (olddspsilence > dspsilence) {
-						totalsilence += olddspsilence;
-					}
-					olddspsilence = dspsilence;
-					ast_verb(3, "Recording dspsilence = %f maxsilence = %f\n", dspsilence / 1000, maxsilence / 1000); /*LIGO-CD-5407 */
+			  	}else{
+					ast_verb(3, "ELSE Recording  dspsilence = %f initial_silence = %f startSilence = %f\n", dspsilence/1000, initial_silence/1000, startsilence/1000);
+					if (maxsilence > 0) {
+						dspsilence = 0;
+						ast_dsp_silence(sildet, f, &dspsilence);
+						if (olddspsilence > dspsilence) {
+							totalsilence += olddspsilence;
+						}
+						olddspsilence = dspsilence;
+						ast_verb(3, "Recording dspsilence = %f maxsilence = %f\n", dspsilence / 1000, maxsilence / 1000); /*LIGO-CD-5407 */
 
-					if (paused) {
-						/* record how much silence there was while we are paused */
-						pausedsilence = dspsilence;
-					} else if (dspsilence > pausedsilence) {
-						/* ignore the paused silence */
-						dspsilence -= pausedsilence;
-					} else {
-						/* dspsilence has reset, reset pausedsilence */
-						pausedsilence = 0;
-					}
+						if (paused) {
+							/* record how much silence there was while we are paused */
+							pausedsilence = dspsilence;
+						} else if (dspsilence > pausedsilence) {
+							/* ignore the paused silence */
+							dspsilence -= pausedsilence;
+						} else {
+							/* dspsilence has reset, reset pausedsilence */
+							pausedsilence = 0;
+						}
 
-					if (dspsilence > maxsilence) {
-						/* Ended happily with silence */
-						ast_verb(3, "Recording automatically stopped after a silence of %d seconds\n", dspsilence/1000);
-						res = 'S';
-						outmsg = 2;
-						break;
+						if (dspsilence > maxsilence) {
+							/* Ended happily with silence */
+							ast_verb(3, "Recording automatically stopped after a silence of %d seconds\n", dspsilence/1000);
+							res = 'S';
+							outmsg = 2;
+							break;
+						}
 					}
 				}
 				/* Exit on any error */
