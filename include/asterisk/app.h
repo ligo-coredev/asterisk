@@ -1149,7 +1149,7 @@ enum ast_record_if_exists {
  * \param sound_duration pointer to integer for storing length of the recording minus all silence
  * \param silencethreshold tolerance of noise levels that can be considered silence for the purpose of silence timeout, -1 for default
  * \param maxsilence_ms Length of time in milliseconds which will trigger a timeout from silence, -1 for default
- * \param start_silence_ms length of time in milliseconds which will trigger a timeout from tart ilence, -1 for default /*LIGO-CD-5407*/
+ * \param start_silence_ms length of time in milliseconds which will trigger a timeout from tart ilence, -1 for default 
  * \param path Optional filesystem path to unlock
  * \param acceptdtmf Character of DTMF to end and accept the recording
  * \param canceldtmf Character of DTMF to end and cancel the recording
