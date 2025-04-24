@@ -1149,6 +1149,7 @@ enum ast_record_if_exists {
  * \param sound_duration pointer to integer for storing length of the recording minus all silence
  * \param silencethreshold tolerance of noise levels that can be considered silence for the purpose of silence timeout, -1 for default
  * \param maxsilence_ms Length of time in milliseconds which will trigger a timeout from silence, -1 for default
+ * \param start_silence_ms length of time in milliseconds which will trigger a timeout from tart ilence, -1 for default 
  * \param path Optional filesystem path to unlock
  * \param acceptdtmf Character of DTMF to end and accept the recording
  * \param canceldtmf Character of DTMF to end and cancel the recording
@@ -1160,7 +1161,7 @@ enum ast_record_if_exists {
  * \retval 't' Recording ended from the message exceeding the maximum duration
  * \retval dtmfchar Recording ended via the return value's DTMF character for either cancel or accept.
  */
-int ast_play_and_record_full(struct ast_channel *chan, const char *playfile, const char *recordfile, int maxtime_sec, const char *fmt, int *duration, int *sound_duration, int beep, int silencethreshold, int maxsilence_ms, const char *path, const char *acceptdtmf, const char *canceldtmf, int skip_confirmation_sound, enum ast_record_if_exists if_exists);
+int ast_play_and_record_full(struct ast_channel *chan, const char *playfile, const char *recordfile, int maxtime_sec, const char *fmt, int *duration, int *sound_duration, int beep, int silencethreshold, int maxsilence_ms, int start_silence_ms, const char *path, const char *acceptdtmf, const char *canceldtmf, int skip_confirmation_sound, enum ast_record_if_exists if_exists);
 
 /*!
  * \brief Record a file based on input from a channel. Use default accept and cancel DTMF.

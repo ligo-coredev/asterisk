@@ -16857,7 +16857,7 @@ static int play_record_review(struct ast_channel *chan, char *playfile, char *re
 			if (ast_test_flag(vmu, VM_OPERATOR))
 				canceldtmf = "0";
 			ast_trace(-1, "Recording '%s'\n", tempfile);
-			cmd = ast_play_and_record_full(chan, playfile, tempfile, maxtime, fmt, duration, sound_duration, 0, silencethreshold, maxsilence, unlockdir, acceptdtmf, canceldtmf, 0, AST_RECORD_IF_EXISTS_OVERWRITE);
+			cmd = ast_play_and_record_full(chan, playfile, tempfile, maxtime, fmt, duration, sound_duration, 0, silencethreshold, maxsilence, 0, unlockdir, acceptdtmf, canceldtmf, 0, AST_RECORD_IF_EXISTS_OVERWRITE); /*LIGO-CD-5407*/
 			if (strchr(canceldtmf, cmd)) {
 			/* need this flag here to distinguish between pressing '0' during message recording or after */
 				canceleddtmf = 1;

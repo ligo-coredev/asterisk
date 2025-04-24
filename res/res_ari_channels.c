@@ -2266,6 +2266,11 @@ static void ast_ari_channels_record_cb(
 		if (strcmp(i->name, "maxSilenceSeconds") == 0) {
 			args.max_silence_seconds = atoi(i->value);
 		} else
+ /* LIGO-CD-5407 Inicio */ 
+		if (strcmp(i->name, "startSilenceSeconds") == 0) {
+			args.start_silence_seconds = atoi(i->value);
+		} else
+/* LIGO-CD-5407 Final */ 
 		if (strcmp(i->name, "ifExists") == 0) {
 			args.if_exists = (i->value);
 		} else
