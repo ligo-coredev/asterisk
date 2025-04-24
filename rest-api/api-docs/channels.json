@@ -1340,8 +1340,7 @@
 								"valueType": "RANGE",
 								"min": 0
 							}
-						},
-/* LIGO-CD-5407 Inicio */ 					
+						},					
 						{
 							"name": "startSilenceSeconds",
 							"description": "Maximum start duration of silence, in seconds. 0 for no limit",
@@ -1355,7 +1354,6 @@
 								"min": 0
 							}
 						},
-/* LIGO-CD-5407 Final */ 
 						{
 							"name": "ifExists",
 							"description": "Action to take if a recording with the same name already exists.",

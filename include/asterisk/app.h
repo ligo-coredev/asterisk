@@ -1161,7 +1161,7 @@ enum ast_record_if_exists {
  * \retval 't' Recording ended from the message exceeding the maximum duration
  * \retval dtmfchar Recording ended via the return value's DTMF character for either cancel or accept.
  */
-int ast_play_and_record_full(struct ast_channel *chan, const char *playfile, const char *recordfile, int maxtime_sec, const char *fmt, int *duration, int *sound_duration, int beep, int silencethreshold, int maxsilence_ms, int start_silence_ms, const char *path, const char *acceptdtmf, const char *canceldtmf, int skip_confirmation_sound, enum ast_record_if_exists if_exists);  /*LIGO-CD-5407*/
+int ast_play_and_record_full(struct ast_channel *chan, const char *playfile, const char *recordfile, int maxtime_sec, const char *fmt, int *duration, int *sound_duration, int beep, int silencethreshold, int maxsilence_ms, int start_silence_ms, const char *path, const char *acceptdtmf, const char *canceldtmf, int skip_confirmation_sound, enum ast_record_if_exists if_exists); 
 
 /*!
  * \brief Record a file based on input from a channel. Use default accept and cancel DTMF.
